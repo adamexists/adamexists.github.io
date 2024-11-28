@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Adam Exists</title>
+    <style>
+        @font-face {
+            font-family: 'Valkyrie';
+            src: url('valkyrie_ot_a_regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Valkyrie';
+            src: url('valkyrie_ot_a_bold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Valkyrie';
+            src: url('valkyrie_ot_a_italic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: italic;
+        }
+        body {
+            font-family: 'Valkyrie', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 95vh;
+            margin: 0;
+            padding: 0 20px 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1050px;
+        }
+        h1 {
+            font-size: 3.7rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        p {
+            font-size: 1.45rem;
+            margin-bottom: 0.7rem;
+        }
+        code {
+            font-size: 1.3rem;
+            color: #323232;
+            border: 1px solid black;
+            border-radius: 2px;
+            padding: 2px;
+        }
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+        a, a:visited {
+            color: black;
+        }
+        .counter {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .highlight {
+            background-color: #f1c40f;
+            padding: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Adam Exists<span class="blink">_</span></h1>
+        <p>Welcome to the digital proof of Adam's existence!</p>
+        <p>Congratulations! You've stumbled upon <span class="highlight">irrefutable evidence</span> that Adam is, indeed, a real person. There is simply no way this isn't the case, and I'm sure you agree.</p>
+        <p>Adam has existed for <span id="existenceTime" class="counter"></span></p>
+        <p>The actuarial tables suggest Adam will continue to exist for about <span id="remainingTime" class="counter"></span></p>
+        <p>In the meantime, Adam works as a software engineering leader. He specializes in financial technology, payment processing, and systems programming in Rust/Go/C. He maintains <a href="https://git.sr.ht/~house">a modest set of open source projects</a>. Personally, among other things, Adam enjoys hiking, photography, theology, and organizational design. Adam values his privacy, has no social media, and does not write a blog.
+        <p>Location: Please consult the authoritative record at <a href="https://doesadamliveincanada.com">doesadamliveincanada.com</a>.</p>
+        <p>Contact: <span id="email"></span>.</p>
+    </div>
+    <script>
+        const birthDate = new Date('1995-04-21T18:30:00Z');
+        const lifeExpectancy = 73.4; // As reported by the National Center for Health Statistics
+
+        function updateCounters() {
+            const now = new Date();
+            const existedTime = now - birthDate;
+            const remainingTime = (birthDate.getTime() + lifeExpectancy * 365.25 * 24 * 60 * 60 * 1000) - now.getTime();
+
+            document.getElementById('existenceTime').textContent = formatDuration(existedTime);
+            document.getElementById('remainingTime').textContent = formatDuration(remainingTime);
+        }
+
+        function formatDuration(duration) {
+            const years = Math.floor(duration / (365.25 * 24 * 60 * 60 * 1000));
+            const days = Math.floor((duration % (365.25 * 24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000));
+            const hours = Math.floor((duration % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+            const minutes = Math.floor((duration % (60 * 60 * 1000)) / (60 * 1000));
+            const seconds = Math.floor((duration % (60 * 1000)) / 1000);
+
+            return `${years}y ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateCounters, 1000);
+        updateCounters(); // Initial call to avoid delay
+        
+        // lazy anti-spam measure
+        const enc = '==QbvNmLzR3cphXZtFGZhBUbhRWY';
+
+        function injectEmail() {
+            const container = document.getElementById('email');
+            const reversedEmail = enc.split('').reverse().join('');
+            const email = atob(reversedEmail);
+            container.innerHTML = `<a href="mailto:${email}">${email}</a>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', injectEmail);
+    </script>
+</body>
+</html>
